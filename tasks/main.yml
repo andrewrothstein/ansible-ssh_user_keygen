@@ -10,14 +10,14 @@
     state: directory
     mode: 0700
   
-- name: install authorize public key...
+- name: authorize public key...
   become: yes
   become_user: root
   with_items: '{{ssh_user_target_users}}'
   lineinfile:
     create: yes
     owner: '{{item.u}}'
-    path: '{{item.hd | default(ssh_user_default_homedir + "/" + item.u)}}/.ssh/authorized_keys'
+    dest: '{{item.hd | default(ssh_user_default_homedir + "/" + item.u)}}/.ssh/authorized_keys'
     line: '{{lookup("file", ssh_user_pubkey)}}'
     mode: 0644
 
