@@ -1,15 +1,22 @@
 ---
 # tasks file for ssh-user-keygen
 - name: ensure ~/.ssh directory exists
+  become: yes
+  become_user: root
+  with_items: '{{ssh_user_target_users}}'
   file:
-    path: '{{ ansible_env.HOME }}/.ssh'
+    owner: '{{item.u}}'
+    path: '{{item.hd | default(ssh_user_default_homedir + "/" + item.u)}}/.ssh'
     state: directory
     mode: 0700
   
 - name: install authorize public key...
+  become: yes
+  become_user: root
   lineinfile:
     create: yes
-    path: '{{ansible_env.HOME}}/.ssh/authorized_keys'
+    owner: '{{item.u}}'
+    path: '{{item.hd | default(ssh_user_default_homedir + "/" + item.u)}}/.ssh/authorized_keys'
     line: '{{lookup("file", ssh_user_pubkey)}}'
     mode: 0644
 
