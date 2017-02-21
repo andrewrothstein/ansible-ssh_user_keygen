@@ -13,6 +13,7 @@
 - name: install authorize public key...
   become: yes
   become_user: root
+  with_items: '{{ssh_user_target_users}}'
   lineinfile:
     create: yes
     owner: '{{item.u}}'
