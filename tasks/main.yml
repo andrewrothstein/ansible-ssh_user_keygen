@@ -1,26 +1,16 @@
 ---
 # tasks file for ssh-user-keygen
 - name: ensure ~/.ssh directory exists
-  file: >-
-    path={{ ansible_env.HOME }}/.ssh
-    state=directory
-    owner=root
-    group=root
-    mode=0700
+  file:
+    path: '{{ ansible_env.HOME }}/.ssh'
+    state: directory
+    mode: 0700
   
-- name: install deploy private key...
-  template: >-
-    src=insecure
-    dest={{ ansible_env.HOME }}/.ssh/id_rsa
-    owner=root
-    group=root
-    mode=0400
+- name: install authorize public key...
+  lineinfile:
+    create: yes
+    path: '{{ansible_env.HOME}}/.ssh/authorized_keys'
+    line: '{{lookup("file", ssh_user_pubkey)}}'
+    mode: 0644
 
-- name: install deploy public key...
-  template: >-
-    src=insecure.pub
-    dest={{ ansible_env.HOME }}/.ssh/id_rsa.pub
-    owner=root
-    group=root
-    mode=0444
     

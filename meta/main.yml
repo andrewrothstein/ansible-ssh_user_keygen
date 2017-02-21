@@ -1,24 +1,27 @@
 ---
 galaxy_info:
   author: Andrew Rothstein
-  description: role for installing an insecure ssh key pair
+  description: role for authorizing an ssh key pair
   company: BlackRock
   license:
     - MIT
-  min_ansible_version: 1.2
+  min_ansible_version: 2.0
   platforms:
     - name: EL
       versions:
         - 7
     - name: Fedora
       versions:
-        - 21
+        - 23
+        - 24
+        - 25
     - name: Ubuntu
       versions:
         - trusty
+        - xenial
 
-  categories:
-    - development
+  galaxy_tags:
+    - ssh
 
 dependencies: []
   

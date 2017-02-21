@@ -1,2 +1,9 @@
 ---
 # defaults file for ssh-user-keygen
+ssh_user_target_users:
+  - root
+
+ssh_user_keydir: ~/.ssh
+ssh_user_keypair: id_rsa
+ssh_user_pubkey_ext: pub
+
