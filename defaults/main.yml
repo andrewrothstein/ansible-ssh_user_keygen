@@ -8,4 +8,3 @@ ssh_user_target_users:
 ssh_user_keydir: ~/.ssh
 ssh_user_keypair: id_rsa
 ssh_user_pubkey_ext: pub
-
